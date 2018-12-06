@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <p class="title">Select Computer Difficulty</p>
+    <br>
+    <!-- A form that allows the user to select a new difficulty -->
+    <form align="center" action="/difficulty" method="post">
+        <select name="difficulty" id="difficulty">
+            <option disabled selected value="difficulty">Difficulty</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+        <br><br>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+    <!-- Adapted from Survey; makes sure that a difficulty was selected -->
+    <script>
+        // Checks to make sure that all required info was submitted
+        document.querySelector('form').onsubmit = function() {
+            if (document.getElementById('difficulty').value == "difficulty") {
+                alert('Please select a difficulty!!');
+                return false;
+            }
+            return true;
+        };
+
+    </script>
+{% endblock %}

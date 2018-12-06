@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <p class="title">Register</p>
+    <!-- Taken from my submission to Finance; allows a user to register -->
+    <form action="/register" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" id="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" id="password" placeholder="Password" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="confirmation" id="confirmation" placeholder="Confirm Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+    <!-- Also taken from my submission to Finance; implements check -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        document.querySelector('form').onsubmit = function(event) {
+            event.preventDefault();
+            // This bit is adapted from my submission to Survey - makes sure all required info was put in
+            if (!document.getElementById('username').value || !document.getElementById('password').value || !document.getElementById('confirmation').value) {
+                alert('Please provide all required info!!');
+            }
+            else {
+                let username = document.getElementById('username');
+                $.get('/check?username=' + username.value, function(bool) {
+                    if (!bool) {
+                        alert('Sorry! Username taken!');
+                    }
+                    else {
+                        document.querySelector('form').submit();
+                    }
+                });
+            }
+        };
+    </script>
+{% endblock %}

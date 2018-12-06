@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <p class="title">Instructions: Click the blue button within a box to select that box for your move.</p>
+    <!-- Gives the user the option to defer the first move to the computer -->
+    <!-- After the first move, application.py removes this option -->
+    {% for value in option %}
+        <p class="secondary">Alternatively, elect to let the computer move first.</p>
+        <form class="secondary" action="/game" method="post">
+            <input hidden name="space" type="radio" value="{{ value }}" checked="checked">
+            <button class="btn btn-primary" type="submit">{{ value }}</button>
+        </form>
+        <br>
+    {% endfor %}
+    <p class="title">Difficulty: {{ difficulty }}</p>
+    <br>
+    <table>
+        <!-- Inputs the X's and O's into the table -->
+        {% for row in rows %}
+            <tr>
+                <!-- Taken from http://jinja.pocoo.org/docs/dev/tricks/#accessing-the-parent-loop to give each entry a unique ID -->
+                {% set rowloop = loop %}
+                {% for entry in row %}
+                    {% set id = 10 * rowloop.index0 + loop.index0 %}
+                    <td class="{{ entry }}" id="{{ id }}">
+                        <!-- A StackOverflow forum helped me with the if syntax in jinja -->
+                        {% if entry == " " %}
+                            <!-- If the entry isn't already taken by X or O, it contains a button that allows the user to select it -->
+                            <form action="/game" method="post">
+                                <input hidden name="space" type="radio" value="{{ id }}" checked="checked">
+                                <button class="btn btn-primary" type="submit"></button>
+                            </form>
+
+                        {% else %}
+                            {{ entry }}
+
+                        {% endif %}
+
+                        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                        <script>
+                            // Taken from check in Register
+                            // At the end of the game, changes the color of every entry not in the winning 3 to black
+                            $.get("/end?space=" + "{{ id }}", function(bool) {
+                                if (!bool) {
+                                    document.getElementById("{{ id }}").className = "end";
+                                }
+                            });
+                        </script>
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <p class="title" id="message">{{ message }}</p>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        // This was taken from https://stackoverflow.com/questions/10474829/alert-after-page-load
+        // Alerts the user every time the CPU moves, and with the result of the game once it ends
+        $(document).ready(function(){
+            alert("{{ message }}");
+        });
+    </script>
+{% endblock %}

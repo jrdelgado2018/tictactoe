@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!-- The design of this website was taken from the distribution code to Survey -->
+<!-- I edited the navbar to reflect the contents of my website -->
+<html>
+
+    <head>
+
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <!-- http://getbootstrap.com/docs/4.1/ -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+        <link href="/static/styles.css" rel="stylesheet">
+
+        <title>TicTac50</title>
+
+    </head>
+
+    <body>
+
+        <!-- http://getbootstrap.com/docs/4.1/components/navbar/ -->
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <a class="navbar-brand mb-1 h1" href="/">TicTac50</a>
+            <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" type="button" data-target="#navbarNav" data-toggle="collapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/difficulty">Change Difficulty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/history">Game History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Log Out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register Account</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <p class="navbar">Click "TicTac50" to start a new game. Click "Change Difficulty" to change the computer's difficulty level. Click "Game History" to track the results of your past games. Click "Log Out" to log out of your account. Click "Register Account" to create a new account. Have fun!</p>
+            </div>
+        </nav>
+
+        <!-- http://getbootstrap.com/docs/4.1/layout/overview/#containers -->
+        <main class="container-fluid p-5">
+            {% block main %}{% endblock %}
+        </main>
+
+    </body>
+
+</html>

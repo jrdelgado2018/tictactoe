@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <p class="title">Log In</p>
+    <!-- Taken from my submission to Finance; logs the user in -->
+    <form action="/login" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" id="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" id="password" placeholder="Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+
+    <script>
+        // Checks to make sure that all required info was submitted - adapted from my submission to Survey
+        document.querySelector('form').onsubmit = function() {
+            if (!document.getElementById('username').value || !document.getElementById('password').value) {
+                alert('Please provide all required info!!');
+                return false;
+            }
+            return true;
+        };
+
+    </script>
+{% endblock %}

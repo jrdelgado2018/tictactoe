@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <p class="title">Game History</p>
+    <!-- Creates a table that displays the past results -->
+    <table>
+        <tr>
+            <th>CPU Difficulty</th>
+            <th>Game Outcome</th>
+            <th>Date</th>
+        </tr>
+        <!-- Iterates over the user's rows in the history database -->
+        {% for row in rows %}
+            <tr>
+                <td>{{ row["difficulty"] }}</td>
+                <td>{{ row["result"] }}</td>
+                <td>{{ row["timestamp"] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
